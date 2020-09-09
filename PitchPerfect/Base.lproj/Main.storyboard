@@ -175,7 +175,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="sA9-4q-4IK" firstAttribute="bottom" secondItem="Nru-sg-mcu" secondAttribute="bottom" constant="96" id="6KB-YU-UvX"/>
                             <constraint firstItem="FLv-IZ-Hz5" firstAttribute="top" secondItem="Nru-sg-mcu" secondAttribute="bottom" constant="8" id="DrX-Gu-sWX"/>
@@ -208,6 +208,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wPb-7z-QWS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.0078431372549019607" green="0.80000000000000004" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
