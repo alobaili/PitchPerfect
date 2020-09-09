@@ -53,7 +53,11 @@ class RecordSoundsViewController: UIViewController {
         
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setActive(false)
+        do {
+            try audioSession.setActive(false)
+        } catch {
+            print("An error occured while stopping recording audio: \(error)")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
