@@ -39,11 +39,11 @@ class PlaySoundsViewController: UIViewController {
             case .fast: playSound(rate: 1.5)
             case .chipmunk: playSound(pitch: 1000)
             case .vader: playSound(pitch: -1000)
-            case .echo: playSound(echo: true)
-            case .reverb: playSound(reverb: true)
+            case .echo: playSound(echoed: true)
+            case .reverb: playSound(reverbed: true)
         }
         
-        configureUI(.playing)
+        configureUI(for: .playing)
     }
     
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class PlaySoundsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureUI(.notPlaying)
+        configureUI(for: .notPlaying)
     }
     
     @IBAction func stopButtonPressed(_ sender: AnyObject) {
