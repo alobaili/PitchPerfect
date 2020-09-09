@@ -42,7 +42,10 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         }        
     }
     
-    func playSound(rate: Float? = nil, pitch: Float? = nil, echo: Bool = false, reverb: Bool = false) {
+    func playSound(rate: Float? = nil,
+                   pitch: Float? = nil,
+                   echo: Bool = false,
+                   reverb: Bool = false) {
         
         // initialize audio engine components
         audioEngine = AVAudioEngine()
@@ -74,13 +77,25 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         
         // connect nodes
         if echo == true && reverb == true {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, reverbNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode,
+                              changeRatePitchNode,
+                              echoNode,
+                              reverbNode,
+                              audioEngine.outputNode)
         } else if echo == true {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode,
+                              changeRatePitchNode,
+                              echoNode,
+                              audioEngine.outputNode)
         } else if reverb == true {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, reverbNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode,
+                              changeRatePitchNode,
+                              reverbNode,
+                              audioEngine.outputNode)
         } else {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, audioEngine.outputNode)
+            connectAudioNodes(audioPlayerNode,
+                              changeRatePitchNode,
+                              audioEngine.outputNode)
         }
         
         // schedule to play and start the engine!
@@ -89,7 +104,8 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
             
             var delayInSeconds: Double = 0
             
-            if let lastRenderTime = self.audioPlayerNode.lastRenderTime, let playerTime = self.audioPlayerNode.playerTime(forNodeTime: lastRenderTime) {
+            if let lastRenderTime = self.audioPlayerNode.lastRenderTime,
+                let playerTime = self.audioPlayerNode.playerTime(forNodeTime: lastRenderTime) {
                 
                 if let rate = rate {
                     delayInSeconds = Double(self.audioFile.length - playerTime.sampleTime) / Double(self.audioFile.processingFormat.sampleRate) / Double(rate)
@@ -99,7 +115,11 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
             }
             
             // schedule a stop timer for when audio finishes playing
-            self.stopTimer = Timer(timeInterval: delayInSeconds, target: self, selector: #selector(PlaySoundsViewController.stopAudio), userInfo: nil, repeats: false)
+            self.stopTimer = Timer(timeInterval: delayInSeconds,
+                                   target: self,
+                                   selector: #selector(PlaySoundsViewController.stopAudio),
+                                   userInfo: nil,
+                                   repeats: false)
             RunLoop.main.add(self.stopTimer!, forMode: RunLoop.Mode.default)
         }
         
@@ -167,4 +187,6 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         alert.addAction(UIAlertAction(title: Alerts.DismissAlert, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
 }
