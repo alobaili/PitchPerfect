@@ -15,6 +15,7 @@ struct PitchPerfectApp: App {
             NavigationView {
                 RecordSoundsView()
             }
+            .accentColor(.cyanContent)
         }
     }
 }

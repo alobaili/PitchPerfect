@@ -26,7 +26,7 @@ struct RecordSoundsView: View {
                 .font(.subheadline)
 
             NavigationLink(
-                destination: Text("Destination"),
+                destination: PlaySoundsView(url: viewModel.audioRecorder.url),
                 isActive: $viewModel.didFinishRecording
             ) {
                 PitchButton(

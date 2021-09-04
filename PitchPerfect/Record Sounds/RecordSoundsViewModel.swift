@@ -22,29 +22,29 @@ extension RecordSoundsView {
             }
         }
 
-        var audioRecorder: AVAudioRecorder!
+        var audioRecorder: AVAudioRecorder
+
+        override init() {
+            let documentsDirectory = try! FileManager.default.url(for: .documentDirectory,
+                                                                 in: .userDomainMask,
+                                                                 appropriateFor: nil,
+                                                                 create: true)
+            let recordingName = "recording.wav"
+            let fileURL = documentsDirectory.appendingPathComponent(recordingName)
+
+            let session = AVAudioSession.sharedInstance()
+            try! session.setCategory(.playAndRecord, mode: .spokenAudio, options: .defaultToSpeaker)
+            try! audioRecorder = AVAudioRecorder(url: fileURL, settings: [:])
+            super.init()
+        }
 
         func startRecording() {
             isRecording = true
 
-            do {
-                let documentsDirectory = try FileManager.default.url(for: .documentDirectory,
-                                                                     in: .userDomainMask,
-                                                                     appropriateFor: nil,
-                                                                     create: true)
-                let recordingName = "recording.wav"
-                let fileURL = documentsDirectory.appendingPathComponent(recordingName)
-
-                let session = AVAudioSession.sharedInstance()
-                try session.setCategory(.playAndRecord, mode: .spokenAudio, options: .defaultToSpeaker)
-                try audioRecorder = AVAudioRecorder(url: fileURL, settings: [:])
-                audioRecorder.delegate = self
-                audioRecorder.isMeteringEnabled = true
-                audioRecorder.prepareToRecord()
-                audioRecorder.record()
-            } catch {
-                print("An error occured while recording audio: \(error)")
-            }
+            audioRecorder.delegate = self
+            audioRecorder.isMeteringEnabled = true
+            audioRecorder.prepareToRecord()
+            audioRecorder.record()
         }
 
         func stopRecording() {
