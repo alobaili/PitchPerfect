@@ -9,25 +9,44 @@
 import SwiftUI
 
 struct RecordSoundsView: View {
+    @StateObject private var viewModel = ViewModel()
+
     var body: some View {
         VStack {
-            PitchButton(image: Image(systemName: "mic.fill"), size: 52, backgroundColor: .cyan, contentColor: .cyanContent) {
+            PitchButton(
+                image: Image(systemName: "mic.fill"),
+                size: 52,
+                backgroundColor: .cyan,
+                contentColor: .cyanContent,
+                action: viewModel.startRecording
+            )
+            .disabled(viewModel.isRecording)
 
-            }
-
-            Text("Tap to Record")
+            Text(viewModel.labelText)
                 .font(.subheadline)
 
-            PitchButton(image: Image(systemName: "stop.fill"), size: 22, backgroundColor: .cyan, contentColor: .cyanContent) {
-
+            NavigationLink(
+                destination: Text("Destination"),
+                isActive: $viewModel.didFinishRecording
+            ) {
+                PitchButton(
+                    image: Image(systemName: "stop.fill"),
+                    size: 22,
+                    backgroundColor: .cyan,
+                    contentColor: .cyanContent,
+                    action: viewModel.stopRecording
+                )
             }
-            .disabled(true)
+            .disabled(!viewModel.isRecording)
         }
+        .navigationBarHidden(true)
     }
 }
 
 struct RecordSoundsView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordSoundsView()
+        NavigationView {
+            RecordSoundsView()
+        }
     }
 }
